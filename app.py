@@ -23,13 +23,6 @@ app.state.limiter = limiter
 
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-origins = [
-    "http://chess.roastlemon.com",
-    "https://chess.roastlemon.com",
-    "http://localhost:3000",
-    "https://localhost:3000",
-]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -42,7 +35,7 @@ app.add_middleware(
 def home(
     request: Request
 ):
-    return {"Client host": request.client.host, "params": request.query_params}
+    return {"Server is live": "Success"}
 
 @app.get("/engine", dependencies=[Depends(api_key_auth)])
 @limiter.limit("1/second")

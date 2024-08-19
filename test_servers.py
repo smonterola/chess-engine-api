@@ -5,7 +5,7 @@ headers = {
 }
 
 print(requests.get(
-    url="https://chess-engine-api.onrender.com", 
+    url="https://chess-engine-api.onrender.com/engine", 
     headers=headers, 
     params={"fen":"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
     ).json())
@@ -18,5 +18,4 @@ print(requests.get(
 
 print(requests.get(
     url="https://chess-api.roastlemon.com",
-    headers=headers,
     ))
