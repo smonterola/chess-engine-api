@@ -4,15 +4,15 @@ headers = {
     'Authorization': f'Bearer {APIKEY.APIKEYS[0]}'
 }
 
-#TESTING RENDER
+#TESTING MY DOMAIN
 print(requests.get(
-    url="https://chess-engine-api.onrender.com/", 
+    url="https://chess-api.roastlemon.com/", 
     headers=headers, 
     params={"fen":"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
     ).json())
 
 print(requests.get(
-    url="https://chess-engine-api.onrender.com/engine", 
+    url="https://chess-api.roastlemon.com/engine", 
     headers=headers, 
     params={"fen":"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
     ).json())
@@ -29,9 +29,3 @@ print(requests.get(
     headers=headers, 
     params={"fen":"rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}
     ).json())
-
-#TESTING MY DOMAIN
-print(requests.get(
-    url="https://chess-api.roastlemon.com",
-    headers=headers,
-    ))
