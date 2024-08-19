@@ -31,11 +31,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
 @limiter.limit("1/second")
 def home(
     request: Request
 ):
-    return {"Server is live": "Success"}
+    return {"Server is live": "Success", "request":request.json}
 
 @app.get("/engine", dependencies=[Depends(api_key_auth)])
 @limiter.limit("1/second")
