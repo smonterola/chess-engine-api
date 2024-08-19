@@ -1,8 +1,9 @@
 import requests
-
+import APIKEY
 headers = {
-    'Authorization': 'Bearer cd6b569e-42cd-4f2f-9132-f6b3f0d61d40'
+    'Authorization': f'Bearer {APIKEY.APIKEYS[0]}'
 }
+
 print(requests.get(
     url="http://chess-api.roastlemon.com", 
     headers=headers, 
