@@ -32,20 +32,23 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.get("/", dependencies=[Depends(api_key_auth)])
 @limiter.limit("1/second")
 def home(
     request: Request
 ):
     return {"Client host": request.client.host, "params": request.query_params}
 
-@app.get("/about", dependencies=[Depends(api_key_auth)])
-def about():
-    return {"Data": "About"}
+@app.get("/engine", dependencies=[Depends(api_key_auth)])
+@limiter.limit("1/second")
+def engine(
+    request: Request
+):
+    return {"Client host": request.client.host, "params": request.query_params}
+
 
