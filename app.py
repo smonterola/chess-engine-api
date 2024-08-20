@@ -43,14 +43,14 @@ app.add_middleware(
 )
 
 @app.get("/")
-#@limiter.limit("1/second")
+@limiter.limit("1/second")
 def home(
     request: Request
 ):
     return {"Server is live": "Success", "request":request.json}
 
 @app.post("/engine/{fen_encoding}") #, dependencies=[Depends(api_key_auth)])
-#@limiter.limit("1/second")
+@limiter.limit("1/second")
 async def engine(
     fen_encoding: str,
     request: Request
