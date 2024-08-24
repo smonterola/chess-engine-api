@@ -51,7 +51,7 @@ def home(
 ):
     return {"Server is live": "Success", "request":request.json}
 
-@app.get("/engine/{fen_encoding}") #, dependencies=[Depends(api_key_auth)])
+@app.get("/engine/{fen_encoding}", dependencies=[Depends(api_key_auth)])
 @limiter.limit("1/second")
 async def engine(
     fen_encoding: str,
