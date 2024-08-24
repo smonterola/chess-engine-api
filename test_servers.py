@@ -1,5 +1,5 @@
 import requests
-import src.APIKEY as APIKEY
+import APIKEY as APIKEY
 from src.accessBook import fixFen
 headers = {
     'Authorization': f'Bearer {APIKEY.APIKEYS[0]}'

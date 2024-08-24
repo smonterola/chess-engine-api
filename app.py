@@ -6,7 +6,7 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
-import src.APIKEY as APIKEY
+import APIKEY as APIKEY
 from src.accessBook import *
 
 import random
