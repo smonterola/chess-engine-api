@@ -22,5 +22,5 @@ def bookArgs(fen: str):
     return args
 
 def chooseMove(bookEntry):
-    return random.choices(bookEntry[0], weights=bookEntry[1])
+    return random.choices(bookEntry[0], weights=bookEntry[1])[0]
 
