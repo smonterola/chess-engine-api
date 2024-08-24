@@ -15,17 +15,16 @@ def main():
         moves_list = []
         moves_frequencies = []
         for line in opening_data:
-            #print(line)
             line_segment = line.split(" ")
-            #print(line_segment)
             move = line_segment[0]
-            frequency = line_segment[1]
+            frequency = int(line_segment[1])
             moves_list.append(move)
             moves_frequencies.append(frequency)
         opening_book[fen_opening] = [moves_list, moves_frequencies]
     #print(json.dumps(opening_book))
     #print(len(opening_book))
-    opening_book_json_file = open("openings.py", "w")
+    opening_book_json_file = open("openingBook.py", "w")
+    opening_book_json_file.write("opening_book = ")
     opening_book_json_file.write(json.dumps(opening_book, indent=4))
 
 if __name__ == "__main__":

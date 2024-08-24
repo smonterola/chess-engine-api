@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-from openingBook import opening_book
+from src.creatingBook.openingBook import opening_book
+import random
 
 def fixFen(fen: str):
     return fen.translate(str.maketrans("|_/ ", "/ |_"))
 
 def lenBook():
     return len(opening_book)
-    #json.dumps(opening_book, indent=4)
 
 def hasBook(fenArgs):
     for fen in fenArgs:
         if fen in opening_book:
             return opening_book[fen]
-    return False
+    return [[""],[1]]
 
 def bookArgs(fen: str):
     brokenFen = fen.split(" ")[:-2]
@@ -20,4 +20,7 @@ def bookArgs(fen: str):
     if brokenFen[-1] != "-":
         args.append(" ".join(brokenFen[:-1])+" -")
     return args
+
+def chooseMove(bookEntry):
+    return random.choices(bookEntry[0], weights=bookEntry[1])
 

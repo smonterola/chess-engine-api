@@ -1,15 +1,15 @@
 from fastapi import FastAPI, Request, Body, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.middleware.cors import CORSMiddleware
-#from routers.items import router as item_router
-#from routers.automations import router as automations_router
 
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
-import APIKEY
-from accessBook import *
+import src.APIKEY as APIKEY
+from src.accessBook import *
+
+import random
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 def api_key_auth(api_key: str = Depends(oauth2_scheme)):
@@ -23,8 +23,6 @@ limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI()
 app.state.limiter = limiter
-#app.include_router(item_router)
-#app.include_router(automations_router)
 
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
@@ -45,30 +43,27 @@ app.add_middleware(
 )
 
 @app.get("/")
-@limiter.limit("1/second")
+@limiter.limit("60/minute")
 def home(
     request: Request
 ):
     return {"Server is live": "Success", "request":request.json}
 
 @app.get("/engine/{fen_encoding}", dependencies=[Depends(api_key_auth)])
-@limiter.limit("1/second")
+@limiter.limit("60/minute")
 async def engine(
     fen_encoding: str,
     request: Request
 ):
     fen = fixFen(fen_encoding)
-    #params = request.query_params
-    #print(params)
-    #print(request.query_params)
-    size = lenBook()
+    bookEntry = hasBook(bookArgs(fen))
+    move = chooseMove(bookEntry)
     
     return {
         "Client host": request.client.host, 
-        "bookSize" : size,
         "fen" : fen,
-        "bookArg" : bookArgs(fen),
-        "moves": hasBook(bookArgs(fen))
+        "entry": bookEntry,
+        "selected_move" : move
     }
 
 
