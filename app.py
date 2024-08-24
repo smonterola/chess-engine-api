@@ -33,6 +33,8 @@ origins = [
     "https://chess.roastlemon.com"
     "http://localhost:3000",
     "http://chess.roastlemon.com"
+    "http://10.10.0.239:3000",
+    "https://10.10.0.239:3000/"
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -49,7 +51,7 @@ def home(
 ):
     return {"Server is live": "Success", "request":request.json}
 
-@app.post("/engine/{fen_encoding}") #, dependencies=[Depends(api_key_auth)])
+@app.get("/engine/{fen_encoding}") #, dependencies=[Depends(api_key_auth)])
 @limiter.limit("1/second")
 async def engine(
     fen_encoding: str,

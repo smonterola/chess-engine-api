@@ -30,7 +30,7 @@ print(requests.get(
     ).json())
 
 url = f"http://127.0.0.1:8000/engine/{encoded_fen}"
-print(requests.post(
+print(requests.get(
     url=url,
     json={"test":"test"},
     headers=headers, 
