@@ -9,8 +9,6 @@ from slowapi.errors import RateLimitExceeded
 import APIKEY as APIKEY
 from src.accessBook import *
 
-import random
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 def api_key_auth(api_key: str = Depends(oauth2_scheme)):
     if api_key not in APIKEY.APIKEYS:
